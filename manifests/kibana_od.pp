@@ -6,7 +6,7 @@ class wazuh::kibana_od (
   $kibana_od_version = '1.11.0',
   $kibana_od_elastic_user = 'admin',
   $kibana_od_elastic_password = 'admin',
-  $kibana_od_app_version = '4.0.4_7.9.1',
+  $kibana_od_app_version = '4.1.4_7.10.0-1',
   $kibana_od_elasticsearch_ip = 'localhost',
   $kibana_od_elasticsearch_port = '9200',
 
@@ -21,8 +21,8 @@ class wazuh::kibana_od (
                                       'password' => 'bar',
                                     },
                                   ]
+  $kibana_od_app_baseurl = 'https://packages.wazuh.com/4.x/ui/kibana',
 ) {
-
 
   # install package
   package { 'Installing OD Kibana...':
@@ -63,7 +63,7 @@ class wazuh::kibana_od (
 
   exec {'Installing Wazuh App...':
     path    => '/usr/bin',
-    command => "sudo -u ${kibana_od_elastic_user}:${kibana_od_elastic_password} -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-${kibana_od_app_version}.zip",
+    command => "sudo -u ${kibana_od_elastic_user}:${kibana_od_elastic_password} -u kibana /usr/share/kibana/bin/kibana-plugin install ${kibana_od_app_baseurl}/wazuh_kibana-${kibana_od_app_version}.zip",
     creates => '/usr/share/kibana/plugins/wazuh/package.json',
     notify  => Service[$kibana_od_service],
   }
