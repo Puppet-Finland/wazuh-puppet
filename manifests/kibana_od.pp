@@ -20,7 +20,7 @@ class wazuh::kibana_od (
                                       'user'     => 'foo',
                                       'password' => 'bar',
                                     },
-                                  ]
+                                  ],
   $kibana_od_app_baseurl = 'https://packages.wazuh.com/4.x/ui/kibana',
 ) {
 
