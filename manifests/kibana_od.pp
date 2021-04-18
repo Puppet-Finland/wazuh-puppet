@@ -63,7 +63,7 @@ class wazuh::kibana_od (
 
   exec {'Installing Wazuh App...':
     path    => '/usr/bin',
-    command => "sudo -u ${kibana_od_elastic_user}:${kibana_od_elastic_password} kibana /usr/share/kibana/bin/kibana-plugin install  ${wazuh_kibana_package_url}",
+    command => "sudo -u ${kibana_od_elastic_user}:${kibana_od_elastic_password} -u kibana /usr/share/kibana/bin/kibana-plugin install ${wazuh_kibana_package_url}",
     creates => '/usr/share/kibana/plugins/wazuh/package.json',
     notify  => Service[$kibana_od_service],
   }
