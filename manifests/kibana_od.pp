@@ -21,7 +21,7 @@ class wazuh::kibana_od (
                                       'password' => 'bar',
                                     },
                                   ],
-  $kibana_od_app_baseurl = 'https://packages.wazuh.com/4.x/ui/kibana',
+  $wazuh_kibana_package_url = 'https://github.com/wazuh/wazuh-kibana-app/releases/download/v4.1.4-7.10.2/wazuh_kibana-4.1.4_7.10.2-1.zip'
 ) {
 
   # install package
@@ -63,7 +63,7 @@ class wazuh::kibana_od (
 
   exec {'Installing Wazuh App...':
     path    => '/usr/bin',
-    command => "sudo -u ${kibana_od_elastic_user}:${kibana_od_elastic_password} -u kibana /usr/share/kibana/bin/kibana-plugin install ${kibana_od_app_baseurl}/wazuh_kibana-${kibana_od_app_version}.zip",
+    command => "sudo -u ${kibana_od_elastic_user}:${kibana_od_elastic_password} -u kibana ${wazuh_kibana_package_url}",
     creates => '/usr/share/kibana/plugins/wazuh/package.json',
     notify  => Service[$kibana_od_service],
   }
