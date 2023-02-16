@@ -1,0 +1,3 @@
+class wazuh::agent::reset {
+
+  }
